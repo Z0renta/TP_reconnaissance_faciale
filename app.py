@@ -1,17 +1,8 @@
-import numpy as np
-
-matrix = np.array([
-    [12, 45, 78, 89],
-    [56, 78, 90, 123],
-    [34, 56, 78, 89],
-    [45, 67, 89, 100],
-    [23, 45, 67, 78],
-    [78, 90, 123, 145],
-    [56, 78, 90, 123],
-    [34, 56, 78, 89]
-])
-
-X_min = 0
-X_max = 255
-normalized_matrix = (matrix - X_min) / (X_max - X_min)
-print(normalized_matrix)
+import face_recognition
+known_image = face_recognition.load_image_file('file1.jpg')
+unknown_image = face_recognition.load_image_file('file2.jpg')
+biden_encoding = face_recognition.face_encodings(known_image)[0]
+unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
+results = face_recognition.compare_faces([biden_encoding],
+unknown_encoding)
+print(str(results))
